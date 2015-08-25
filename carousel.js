@@ -10,7 +10,7 @@ class Carousel {
     /**
      * @constructor
      */
-    constructor(...args) {
+    constructor(elem) {
 		this.pageWidth = 0;
 		this.use_transform = dom.hasClass(document.documentElement,'csstransforms3d');
 		this.css_prefix_transform = (typeof Modernizr !== 'undefined') ? Modernizr.prefixed('transform') : 'transform';
