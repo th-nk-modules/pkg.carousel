@@ -10,9 +10,8 @@ class Carousel {
     /**
      * @constructor
      */
-    constructor(elem) {
+    constructor(...args) {
 		this.pageWidth = 0;
-		this.carousels = [];
 		this.use_transform = dom.hasClass(document.documentElement,'csstransforms3d');
 		this.css_prefix_transform = (typeof Modernizr !== 'undefined') ? Modernizr.prefixed('transform') : 'transform';
 
@@ -21,41 +20,6 @@ class Carousel {
 			that.resized();
 		});
 		this.init(elem);
-	}
-
-	init() {
-		let elems = document.querySelectorAll('.carousel');
-
-		for (var i =0, il = elems.length; i <il; i++) {
-			this.carousels.push(new Carouselle(elems[i],i));
-		};
-	}
-
-	resized() {
-		for (var i =0, il = this.carousels.length; i <il; i++) {
-			this.carousels[i].setSize();
-		};
-	}
-
-	getTransformString(x,y) {
-		var str;
-		if (isNaN(x)){
-			str = (this.is_ie) ? 'auto' : 'initial';
-		}
-		else {
-			str = (this.is_ie) ? x+'px' : 'translate3d('+x+'px, '+y+'px, 0)';
-		}
-		return str;
-	};
-
-}
-
-class Carouselle extends Carousel {
-    /**
-     * @constructor
-     */
-    constructor(...args) {
-		super(...args);
 	}
 
 	init(elem) {
@@ -102,6 +66,21 @@ class Carouselle extends Carousel {
 
 		this.bindTouchEvents();
 	}
+
+	resized() {
+		this.setSize();
+	}
+
+	getTransformString(x,y) {
+		var str;
+		if (isNaN(x)){
+			str = (this.is_ie) ? 'auto' : 'initial';
+		}
+		else {
+			str = (this.is_ie) ? x+'px' : 'translate3d('+x+'px, '+y+'px, 0)';
+		}
+		return str;
+	};
 
 	addPagination() {
 		let list = document.createElement('ul');
