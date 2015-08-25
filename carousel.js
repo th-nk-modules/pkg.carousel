@@ -410,4 +410,4 @@ class Carousel {
 	}
 }
 
-export { Carousel, Carouselle };
+export { Carousel };
